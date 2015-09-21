@@ -85,7 +85,7 @@ class dbConn{
 		return mysqli_affected_rows($link);//возвращает кортеж - кол-во строк, к которым применилась операция (1 или 0)
 	}
 
-	public static function postIntro($post, $len = 100){
+	public static function postIntro($post, $len = 200){
 		return mb_substr($post, 0, $len);
 	}	
 }
