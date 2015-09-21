@@ -1,1 +1,2 @@
 Application Description
+Описание приложения
