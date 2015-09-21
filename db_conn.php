@@ -32,7 +32,6 @@ class dbConn{
 		$sql = "DELETE FROM records WHERE id=%d";
 		$query = sprintf($sql, $id);
 		$result = mysqli_query(self::connect(), $query) or die(mysqli_error(self::connect()));
-		//$one_record = mysqli_fetch_assoc($result);
 		return mysqli_affected_rows($link); //возвращает кортеж - кол-во строк, к которым применилась операция (1 или 0)
 	}
 
