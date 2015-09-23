@@ -1,5 +1,6 @@
 <?php
-	require_once ('../db_conn.php');
+	require_once ("../db_conn.php");
+	require_once ("../model/posts_managment.php");
 
 	if(isset($_GET['action'])){
 		$action = $_GET['action'];
@@ -9,13 +10,13 @@
 
 	if($action == "add"){
 		if(!empty($_POST['title'])){
-			dbConn::addPost($_POST['title'], $_POST['message'], $_POST['date']);
+			PostsManagment::addPost($link, $_POST['title'], $_POST['message'], $_POST['date']);
 			header('Location: admin.php');
 		}
 		include ("../view/admin_add_post.php");
 	} else 
 	if ($action=="del"){
-		dbConn::delById($_GET['id']);
+		PostsManagment::delById($link, $_GET['id']);
 		header('Location: admin.php');
 	} else 
 	if($action == "edit"){
@@ -26,14 +27,14 @@
 		$id = $_GET['id'];
 
 		if(!empty($_POST) && $id > 0){
-			dbConn::editById($id, $_POST['title'], $_POST['message'], $_POST['date']);
+			PostsManagment::editById($link, $id, $_POST['title'], $_POST['message'], $_POST['date']);
 			header('Location: admin.php');
 		}
 
-		$post = dbConn::postsById($id);
+		$post = PostsManagment::postsById($link, $id);
 		include ("../view/admin_add_post.php");
 	} else {
-	$allPosts = dbConn::allPosts();
+	$allPosts = PostsManagment::allPosts($link);
 	include ("../view/admin_panel.php");
 	}
 
